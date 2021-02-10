@@ -1,75 +1,74 @@
 #include<iostream>
 
 /* 
-Stack class does stuff
-*/
+   Stack class does stuff
+   */
 class Stack {
-    
-    int * stk;
-    int size;
-    int t = -1;
 
-    public:
-    Stack(int size = 5) {
-        this -> size = size;
-        stk = new int[size];
-    }
+	int * stk;
+	int size;
+	int t = -1;
 
-    int getSize() {
-        if (t != -1) return t;
-        else return 0;
-    }
+	public:
+	Stack(int size = 5) {
+		this -> size = size;
+		stk = new int[size];
+	}
 
-    int isEmpty(){
-        if (t < 0) return true;
-        else return false;
-    }
+	int getSize() {
+		if (t != -1) return t;
+		else return 0;
+	}
 
-    int isFull() {
-        if (t == size - 1) return true;
-        else return false;
-    }
+	int isEmpty(){
+		if (t < 0) return true;
+		else return false;
+	}
 
-    int top() {
-        if (!isEmpty()) return stk[t];
-        else return -1;
-    }
+	int isFull() {
+		if (t == size - 1) return true;
+		else return false;
+	}
 
-    void push(int x) {
-        if (!isFull()) {
-            t++;
-            stk[t] = x;
-        }
+	int top() {
+		if (!isEmpty()) return stk[t];
+		else return -1;
+	}
 
-        else {
-            std::cout << ("Stack Overflow Error") << std::endl;
-        }
-    }
+	void push(int x) {
+		if (!isFull()) {
+			t++;
+			stk[t] = x;
+		}
 
-    int pop() {
-        if (!isEmpty()) return stk[t--];
-        else return -1;
-        
-    }
+		else {
+			std::cout << ("Stack Overflow Error") << std::endl;
+		}
+	}
+
+	int pop() {
+		if (!isEmpty()) return stk[t--];
+		else return -1;
+
+	}
 };
 
 void reversePrinter(int arr[], int n) {
-    Stack s(n);
-    for (int i = 0; i < n; i++) {
-        s.push(arr[i]);
-        std::cout << s.top() << " ";
-    }
+	Stack s(n);
+	for (int i = 0; i < n; i++) {
+		s.push(arr[i]);
+	}
 
-    //while (s.isEmpty() != true) {
-    //    std::cout << s.pop() << " " << std::endl; 
-    //}
+	//while (s.isEmpty() != true) {
+	//    std::cout << s.pop() << " " << std::endl; 
+	//}
 
-    for(int i =0; i<n; i++){
-        std::cout << s.pop() << " ";
-    }
+	for(int i =0; i<n; i++){
+		std::cout << s.pop() << " ";
+	}
 }
 
 int main() {
-    int arr[] = {1,2,3,4,5,6,7,8,9,10};
-    reversePrinter(arr, sizeof(arr));
+	int arr[] = {1,2,3,4,5,6,7,8,9,10};
+	reversePrinter(arr, sizeof(arr)/4);
 }
