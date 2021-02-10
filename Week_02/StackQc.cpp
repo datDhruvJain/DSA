@@ -5,14 +5,14 @@
    */
 class Stack {
 
+	int * stk;
 	int size;
 	int t = -1;
 
 	public:
-	char * stk;
 	Stack(int size = 5) {
 		this -> size = size;
-		stk = new char[size];
+		stk = new int[size];
 	}
 
 	int getSize() {
@@ -20,22 +20,22 @@ class Stack {
 		else return 0;
 	}
 
-	bool isEmpty(){
+	int isEmpty(){
 		if (t < 0) return true;
 		else return false;
 	}
 
-	bool isFull() {
+	int isFull() {
 		if (t == size - 1) return true;
 		else return false;
 	}
 
-	char top() {
+	int top() {
 		if (!isEmpty()) return stk[t];
 		else return -1;
 	}
 
-	void push(char x) {
+	void push(int x) {
 		if (!isFull()) {
 			t++;
 			stk[t] = x;
@@ -46,12 +46,8 @@ class Stack {
 		}
 	}
 
-	char pop() {
-		if (!isEmpty()) {
-			int temp = stk[t];
-			t--;
-			return temp;
-		}
+	int pop() {
+		if (!isEmpty()) return stk[t--];
 		else return -1;
 
 	}
@@ -73,46 +69,47 @@ void postfixEvaluator() {
 	std::cin >> n;
 	char arr[n];
 	inputHelper(arr,n);
-	char a,b;
+	int a,b;
 	int temp;
 	Stack s(n);
 
 	for (int i=0; i<n;i++){
-		if (!(arr[i]=='+' || arr[i] == '-'|| arr[i] == '/'|| arr[i] == '*'|| arr[i] == '^')){
-			s.push(arr[i]);
+		if (!(arr[i]=='+' || arr[i] == '-' || arr[i] == '/'|| arr[i] == '*'|| arr[i] == '^')){
+			s.push((int)(arr[i]-'0'));
 		}
 
 		else if (arr[i]=='+') {
 			b = s.pop();
 			a = s.pop();
-			s.push((int)a + (int)b);
+			s.push(a+b);
+
 		}
 
 		else if (arr[i]=='-') {
 			b = s.pop();
 			a = s.pop();
-			s.push((int)a + (int)b);
+			s.push(a-b);
 		}
 
 		else if (arr[i]=='/') {
 			b = s.pop();
 			a = s.pop();
-			s.push((int)a + (int)b);
+			s.push(a/b);
 		}
 
 		else if (arr[i]=='*') {
 			b = s.pop();
 			a = s.pop();
-			s.push((int)a + (int)b);
+			s.push(a * b);
 		}
 
 		else if (arr[i]=='^') {
 			b = s.pop();
 			a = s.pop();
-			s.push((int)a + (int)b);
+			s.push(a ^ b);
 		}
 	}
-	std::cout << (int) s.pop() << std::endl;
+	std::cout << s.pop() << std::endl;
 	
 }
 
