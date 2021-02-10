@@ -57,20 +57,67 @@ class Stack {
 	}
 };
 
-void postfixEvaluator(char arr[]) {
-	int n = inputHelper(arr);
-
+int inputHelper(char arr[],int n){
 	
-	
-}
-
-int inputHelper(char arr[]){
-	int n;
-	std::cout << "Enter the size of the array: " << std::endl;
-	std::cin >> n
 	std::cout << "Enter the characters: " << std::endl;
 	for (int i=0;i<n;i++) {
 		std::cin >> arr[i];
 	}
 	return n;
+}
+
+void postfixEvaluator() {
+	
+	int n;
+	std::cout << "Enter the size of the array: " << std::endl;
+	std::cin >> n;
+	char arr[n];
+	inputHelper(arr,n);
+	char a,b;
+	int temp;
+	Stack s(n);
+
+	for (int i=0; i<n;i++){
+		if (!(arr[i]=='+' || arr[i] == '-'|| arr[i] == '/'|| arr[i] == '*'|| arr[i] == '^')){
+			s.push(arr[i]);
+		}
+
+		else if (arr[i]=='+') {
+			b = s.pop();
+			a = s.pop();
+			s.push((int)a + (int)b);
+		}
+
+		else if (arr[i]=='-') {
+			b = s.pop();
+			a = s.pop();
+			s.push((int)a + (int)b);
+		}
+
+		else if (arr[i]=='/') {
+			b = s.pop();
+			a = s.pop();
+			s.push((int)a + (int)b);
+		}
+
+		else if (arr[i]=='*') {
+			b = s.pop();
+			a = s.pop();
+			s.push((int)a + (int)b);
+		}
+
+		else if (arr[i]=='^') {
+			b = s.pop();
+			a = s.pop();
+			s.push((int)a + (int)b);
+		}
+	}
+	std::cout << (int) s.pop() << std::endl;
+	
+}
+
+
+
+int main(){
+	postfixEvaluator();
 }
