@@ -2,14 +2,14 @@
 
 /* 
    Stack class does stuff
-*/
+   */
 class Stack {
 
-	char * stk;
 	int size;
 	int t = -1;
 
 	public:
+	char * stk;
 	Stack(int size = 5) {
 		this -> size = size;
 		stk = new char[size];
@@ -59,29 +59,49 @@ class Stack {
 
 void checkBalance(char arr[], int n) {
 	Stack s(n);
+	char ck;
 	for (int i = 0; i < n; i++) {
-		if (arr[i] == '[') {
+		if (arr[i] == '[' || arr[i] == '{' || arr[i] == '(') {
 			s.push(arr[i]);
 		}
 
 		else if (arr[i] == ']') { 
-			char ck = s.pop();
+			ck = s.pop();
 			if (ck != '[') {
-				std::cout << "Unbalanced 1" << std::endl;
+				std::cout << "Unbalanced! Not a match" << std::endl;
+				break;
+			}
+		}
+		else if (arr[i] == '}') { 
+			ck = s.pop();
+			if (ck != '{') {
+				std::cout << "Unbalanced! Not a match" << std::endl;
+				break;
+			}
+		}
+		else if (arr[i] == ')') { 
+			ck = s.pop();
+			if (ck != '(') {
+				std::cout << "Unbalanced! Not a match" << std::endl;
 				break;
 			}
 		}
 	}
 
 	if (!s.isEmpty()) {
-		s.pop();
-		std::cout << s.top() <<"Unbalanced 2" << std::endl;
+		std::cout << s.stk << std::endl;
+		std::cout << "Unbalanced! Stack not empty" << std::endl;
+	}
+	else {
+		std::cout << "Balanced" << std::endl;
 	}
 }
 
 int main() {
-	char arr[] = {'a','+','c', '-', 'd', ']', 'k'};
+	//char arr[] = {'a','+','[','c', '{', '-', 'd', ']', 'k'};
 	//char arr[] = {'a','+','[','c', '-', 'd', ']'};
 	//char arr[] = {'a','+','[','c', '-', 'd', ']'};
-	checkBalance(arr, sizeof(arr));
+	char arr[] = {'a','+','[','c','{','}', '-', 'd', ']'};
+
+	checkBalance(arr, sizeof(arr)/sizeof(arr[0]));
 }
