@@ -16,26 +16,45 @@ int front=0, rear=0;//queue index variables
 
 int queueSize() //returns the total number of elements in the queue
 {
-	
+	return front - rear;
 }
 
-int isQueueEmpty()//returns 1 if Queue is empty and 0 otherwise
-
+int isQueueEmpty(){//returns 1 if Queue is empty and 0 otherwise
+	if (front==rear) {
+	return 1;
 	}
+	else return 0;
+}
 
 int isQueueFull()//returns 1 if Queue is full and 0 otherwise
 {
-
+	if (front == queue_size) {
+	return 1;
+	}
+	else return 0;
 }
 
 int enQueue(int x)//returns -1 if Queue is full and 1 otherwise
 {
-
+	if (isQueueFull()==1) {
+		return -1;
+	}
+	
+	queue[front] = x;
+	front++;
+	return 1;
+	
 }
 
 int deQueue()//returns -1 if Queue is empty and the value otherwise
-{	
+{
+	if (isQueueEmpty()==1) {
+	return -1;
+	}
 
+	int temp = queue[rear];
+	rear++;
+	return temp;
 }
 
 int main()
@@ -104,7 +123,7 @@ int main()
 			else
 			{				
 				clock_gettime(CLOCK_MONOTONIC, &start); /* mark start time */ 
-				status=deQueue(x);			
+				status=deQueue();			
 				clock_gettime(CLOCK_MONOTONIC, &end); /* mark the end time */ 
 
 				diff += BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec; 
