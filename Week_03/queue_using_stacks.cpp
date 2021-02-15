@@ -1,65 +1,89 @@
 #include<iostream>
 
-
-class stack {
-	int *stk;
+class Stack {
+	
+	int size;
 	int t = -1;
-
+	
 	public:
-	stack(size) {
+	int *stk;
+
+	Stack(int size=10){
+		this -> size = size;
 		stk = new int[size];
 	}
-
-	void push(int x) {
-		if (!isEmpty()){
-			stk[t];
-		}
-		else return -1;
-	}
 	
-	int pop() {
-		if (!isFull()) {
-			// TODO : Check if decrement works or not
-			return stk[t--];
-		}
-		else return -1;
-	}
-	
-
-	int top(){
-		if (!isEmpty()) {
-			return stack[0];
-		}
-		else return -1;
-	}
-
-	bool isEmpty() {
-		if (t == 0) {
-			return true;
-		}
-		return false;
-	}
-
-	bool isFull() {
-		if (t == sizeof(stack)/sizeof(stack[0])) {
-		return true
-		}
-
+	bool isEmpty(){
+		if (t==-1) return true;
 		else return false;
+	}
+
+	bool isFull(){
+		if (t == (size-1)) return true;
+		else return false;
+	}
+
+	void push(int x){
+		if (!isFull()){
+			// TODO: check increment operator
+			t++;
+			stk[t] = x;
+		}
+		else {
+			std::cout << "Stack overflow error" << std::endl;
+		}
+	}
+
+	int pop(){
+		int temp;
+		if (!isEmpty()){
+			temp = stk[t];
+			t--;
+			return temp;
+		}
+		else return -1;
 	}
 };
 
-class queue {
-	stack s1(10);
-	stack s2(10);
-	public:
-		void enQueue(int x) {
-			s2.push(x);
-		}
+class Queue{
+	int size;
+	Stack *s1;
+	Stack *s2;
+	public :
+	Queue(int size){
+		this -> size = size;
+		s1 = new Stack(size);
+		s2 = new Stack(size);
+	}
 
-		int deQueue() {
-			while (s1.isEmpty()==1){
-				s1.push(s2.pop()) 
-			}
+	void enQueue(int x){
+		if (!(*s2).isFull()){
+			(*s2).push(x);
 		}
+	}
+
+	void deQueue(){
+		while(!(*s2).isEmpty()){
+			(*s1).push((*s2).pop());
+
+		}
+		while(!(*s1).isEmpty()){
+			std::cout << (*s1).pop() << std::endl;
+		}
+	}
+};
+
+int main(){
+	Queue *q = new Queue(10);
+	(*q).enQueue(5);
+	(*q).enQueue(6);
+	(*q).enQueue(7);
+	(*q).enQueue(8);
+	(*q).enQueue(9);
+	(*q).deQueue();
+	(*q).deQueue();
+	(*q).deQueue();
+	(*q).deQueue();
+	(*q).deQueue();
+	(*q).deQueue();
 }
