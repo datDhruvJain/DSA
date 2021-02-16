@@ -7,25 +7,31 @@ using namespace std;
 
 void helper(){
 	arr[0] = -1;
-	arr[1] = 0;
-	int i;
+	arr[1] = 1;
+	int i=0;
 	while(i<size){
-		if(i>0){
-			cout << i << " ";
+		if(arr[i]>0){
+			cout << arr[i] << " : index is " << i << endl;
+
 		}
-		else {
-			cout << i++ << " ";
+		else if(arr[++i] > 0){
+			cout << arr[i] << " : index is " << i << endl;
 		}
 		i*=2;
 	}
 }
 
 int main(){
-	size = 100;
+	size = 11;
 	arr = new int[size];
+
 	for(int i=0; i<size; i++){
 		arr[i] = -1;
 	}
+
+	arr[2] = 1;
+	arr[4] = 1;
+	arr[8] = 1;
 
 	helper();
 }
