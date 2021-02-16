@@ -68,22 +68,38 @@ class Queue{
 
 		}
 		while(!(*s1).isEmpty()){
-			std::cout << (*s1).pop() << std::endl;
+			std::cout << " " << (*s1).pop();
 		}
+
+		std::cout << std::endl;
 	}
 };
 
 int main(){
 	Queue *q = new Queue(10);
-	(*q).enQueue(5);
-	(*q).enQueue(6);
-	(*q).enQueue(7);
-	(*q).enQueue(8);
-	(*q).enQueue(9);
-	(*q).deQueue();
-	(*q).deQueue();
-	(*q).deQueue();
-	(*q).deQueue();
-	(*q).deQueue();
-	(*q).deQueue();
+	char choice;
+	int element;
+	bool flag = true;
+	while(flag){
+		std::cout << "Please select operation (E)nqueue/(D)equeue/e(X)it)" << std::endl;
+		std::cin >> choice;
+		switch (choice) {
+			case 69: {
+					std::cout << "Please Enter element" << std::endl;
+					std::cin >> element;
+					(*q).enQueue(element);
+					break;
+			}
+			case 68: {
+				std::cout << "The element dequeued is ";
+				(*q).deQueue();
+				break;
+			}
+
+			case 88: {
+				flag = false;
+				break;
+			}
+		}
+	}
 }
