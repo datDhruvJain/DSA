@@ -24,7 +24,7 @@ int isEmpty(stack *s) {
 
 void push(stack *s, int x) {
 	if (!isFull(s)) {
-		(*s).t++;
+		++(*s).t;
 		printf("%s", "Pushing an element");
 		(*s).stk[(*s).t] = x;
 	}
@@ -37,7 +37,7 @@ int pop(stack *s){
 	int temp;
 	if(!isEmpty(s)){
 		temp = (*s).stk[(*s).t];
-		(*s).stk--;
+		(*s).t--; // made error here
 		return temp;
 	}
 
@@ -62,7 +62,7 @@ void deQueue(Queue *q) {
 	}
 
 	while (!isEmpty((*q).s1)) {
-		pop((*q).s2);
+		printf("%d\n", pop((*q).s1));
 	}
 	
 }
@@ -73,14 +73,13 @@ int main() {
 
 	(*q).s1 = (stack*) malloc(sizeof(stack));
 	(*((*q).s1)).stk = (int*) malloc(10*sizeof(int));
-	(*((*q).s1)).size = 1;
+	(*((*q).s1)).size = 10;
 	(*((*q).s1)).t = -1;
 	(*q).s2 = (stack*) malloc(sizeof(stack));
 	(*((*q).s2)).stk = (int*) malloc(10*sizeof(int));
-   	(*((*q).s2)).size = 1;
+   	(*((*q).s2)).size = 10;
 	(*((*q).s2)).t = -1;
 
-	enQueue(q, 10);
+	enQueue(q, 10);//deQueue(q);
 	deQueue(q);
-
 }
