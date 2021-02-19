@@ -5,6 +5,7 @@ int size;
 
 using namespace std;
 
+// Helper function, to be called by main
 void helper(){
 	arr[0] = -1;
 	arr[1] = 1;

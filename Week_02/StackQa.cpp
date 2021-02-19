@@ -68,7 +68,20 @@ void reversePrinter(int arr[], int n) {
 	}
 }
 
+void test_1() {
+	std::cout << "Test case 1" << std::endl;
+	int arr[] = {10,15,95,40,24,17};
+	reversePrinter(arr, sizeof(arr)/sizeof(int));
+}
+
+void test_2(){
+	std::cout << "Test case 2" << std::endl;
+	int arr[] = {15};
+	reversePrinter(arr, sizeof(arr)/sizeof(int));
+}
+
 int main() {
-	int arr[] = {1,2,3,4,5,6,7,8,9,10};
-	reversePrinter(arr, sizeof(arr)/4);
+	test_1();
+	std::cout << std::endl;
+	test_2();
 }
