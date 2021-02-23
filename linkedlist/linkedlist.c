@@ -40,8 +40,11 @@ void insert(int index, int x) {
 	}
 
 	Node *temp = start;
-	// TODO: Ask teacher why i=1, it works otherwise it seg faults
-	for(int i =1; i<index;i++){
+	
+	// Index inits from 0, but start is at 0
+	// You need to insert the element at one less than the index.
+	// Then the element is *AT* the index.
+	for(int i =0; i<index-1;i++){
 		temp = temp -> next;
 	}
 
@@ -54,9 +57,8 @@ void insert(int index, int x) {
 
 void display(){
 	Node *n = start;
-	// TODO: Ask teacher why i=1, it works, on i=0 it seg faults
-	for (int i=1; i<=count; i++){
-		printf("%d",n->data);
+	for (int i=0; i<count; i++){
+		printf("%d\n",n->data);
 		n  = n -> next;
 	}
 }
@@ -71,5 +73,6 @@ int main(){
 	insert(6,60);
 	insert(7,70);
 
+	insert(5,55);
 	display();
 }
