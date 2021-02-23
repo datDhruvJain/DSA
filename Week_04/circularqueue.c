@@ -39,20 +39,33 @@ int linearDequeue()
 
 int isCircularQueueEmpty()
 {
-	
+	if (frontC == rearC){
+		return 1;
+	}
+	else return 0;
 }
 int isCircularQueueFull()
 {
-
+	if ((circular_queue_size - frontC + rearC) % circular_queue_size == circular_queue_size - 1) return 1;
+	else return 0;
 }
 int circularEnqueue(int x)
 {
+	if (!isCircularQueueFull()){
+		circular_queue[rearC] == x;
+		rearC++;
+		return 1;
+	}
 
+	else return -1;
 }
 
 int circularDequeue()
 {
-
+	if (!isCircularQueueEmpty()){
+		int temp = circular_queue[frontC];
+		frontC =  (frontC+1)%circular_queue_size;
+	}
 }
 
 
