@@ -21,7 +21,7 @@ int isLinearQueueFull()
 }
 int linearEnqueue(int x)
 {
-	if(!isCircularQueueFull()){
+	if(!isLinearQueueFull()){
 		linear_queue[rearL] = x;
 		rearL++;
 		return 1;
@@ -31,8 +31,8 @@ int linearEnqueue(int x)
 
 int linearDequeue()
 {
-	if(!isCircularQueueEmpty()){
-		linear_queue[frontL++];
+	if(!isLinearQueueEmpty()){
+		return linear_queue[frontL++];
 	}
 	else return -1;
 }
@@ -52,7 +52,7 @@ int isCircularQueueFull()
 int circularEnqueue(int x)
 {
 	if (!isCircularQueueFull()){
-		circular_queue[rearC] == x;
+		circular_queue[rearC] = x;
 		rearC++;
 		return 1;
 	}
@@ -65,7 +65,9 @@ int circularDequeue()
 	if (!isCircularQueueEmpty()){
 		int temp = circular_queue[frontC];
 		frontC =  (frontC+1)%circular_queue_size;
+		return 1;
 	}
+	else return 0;
 }
 
 
@@ -127,7 +129,7 @@ int main()
 			}
 			else
 			{				
-				status=linearDequeue(x);			
+				status=linearDequeue();			
 			
 				if(status==-1)//queue empty
 				{
@@ -138,7 +140,7 @@ int main()
 					linear_Q_Count++;
 				}
 
-				status=circularDequeue(x);			
+				status=circularDequeue();			
 			
 				if(status==-1)//queue empty
 				{
