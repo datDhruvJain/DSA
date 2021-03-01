@@ -1,4 +1,4 @@
-#include "../lol/linkedlist.h"
+#include "linkedlist.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -23,8 +23,7 @@ void insert(int index, int x) {
 	// An Error occurs when we try to insert in negative index
 	// Or when we try to insert at an index that does not *Exist*
 	if (index < 0 || count > index){
-		printf("Error, insertion not possible \n 
-				Please check index");
+		printf("%s","Error, insertion not possible \nPlease check index");
 	}
 
 	Node *n = new_node();
