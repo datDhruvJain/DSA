@@ -1,6 +1,8 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include "../lol/linkedlist.h"
+#include <stdio.h>
+#include <stdlib.h>
 
+// Define a Stucture with Node type
 typedef struct node {
 	struct node *next;
 	int data;
@@ -15,39 +17,44 @@ Node* new_node(){
 	return n;
 }
 
-void iniial(){
-    Node *n = new_node();
-	start = n;
-}
-
 void insert(int index, int x) {
-	if (count == 0){
-		iniial();
-		start -> data = x;
-		count++;
-		return;
-	}
 	
+	// First we check if the insertion is possible given the Index
+	// An Error occurs when we try to insert in negative index
+	// Or when we try to insert at an index that does not *Exist*
+	if (index < 0 || count > index){
+		printf("Error, insertion not possible \n 
+				Please check index");
+	}
 
 	Node *n = new_node();
 	n -> data = x;
 
-	if (count == 1){
-		start -> next = n;
-		n -> next = NULL;
-		count++;
-		return;
+	if (index == 0){
+		if (count != 0){
+			n -> next = start -> next;
+			start = n;
+			count++;
+			return;
+		}
+		else {
+			start = n;
+			n -> next = NULL;
+			return;
+		}
 	}
+
 
 	Node *temp = start;
 	
-	// Index inits from 0, but start is at 0
-	// You need to insert the element at one less than the index.
-	// Then the element is *AT* the index.
+	// For Linked list, we need to insert AT the index.
+	// For that to happen, we need the index of the element before the insertion index
+	// That's why we need index-1
 	for(int i =0; i<index-1;i++){
 		temp = temp -> next;
 	}
-
+	
+	// This just changes the next variables
 	n -> next = temp -> next;
 	temp -> next = n;
 

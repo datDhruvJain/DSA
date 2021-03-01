@@ -15,3 +15,8 @@ int size();
 int isEmpty();
 
 #endif
+
+/* Remeber:
+ * The pointers (start and next) hold pointer to the next memory location
+ * so start and temp hold the address of the next Node
+ * When we do something like temp = temp -> next; we mean that the pointer temp now pointer to the next memory location */
