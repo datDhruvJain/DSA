@@ -6,8 +6,11 @@
  * data stores the data, while *node points to the next node
  */
 
+// Insert an element into the linked list
 void insert(int ,int);
-int Node_delete(int index);
+
+// delete Node at the index
+void index_delete(int index);
 int find(int e);
 int get(int index);
 void display();
