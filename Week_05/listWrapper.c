@@ -53,20 +53,25 @@ int searchNode(struct student*ptr,char rollNumber[20])
 	//if (count<0){return 0;}
 	struct student* temp = ptr;
 
-	int count;
-	while( temp->next !=NULL){
+	int count=0;
+	while( temp !=NULL){
 		temp = temp -> next;
 		count++;
 	}
 
 	temp = ptr;
 	int itr = 0;
-
-	for(int i=0;i<count-1;i++){
-		if (strcmp(rollNumber, temp->rollNo)){return itr;}
+	printf("%d",count);
+	for(int i=0;i<count;i++){
+		if (strcmp(rollNumber, temp->rollNo)==1)
+		{
+			return itr;
+		}
+			printf("%d\n", itr);
 		temp = temp -> next;
 		itr++;
 	}
+	return 0;
 
 }
 
