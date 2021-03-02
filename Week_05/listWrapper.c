@@ -61,11 +61,11 @@ int searchNode(struct student*ptr,char rollNumber[20])
 
 	temp = ptr;
 	int itr = 0;
-	printf("%d",count);
 	for(int i=0;i<count;i++){
-		if (strcmp(rollNumber, temp->rollNo)==1)
+		if (strcmp(rollNumber, temp->rollNo)==0)
 		{
-			return itr;
+			printf("%s\n%s\n", rollNumber, temp->rollNo);
+			return itr+1;
 		}
 			printf("%d\n", itr);
 		temp = temp -> next;
