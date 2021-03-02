@@ -64,7 +64,7 @@ int searchNode(struct student*ptr,char rollNumber[20])
 	for(int i=0;i<count;i++){
 		if (strcmp(rollNumber, temp->rollNo)==0)
 		{
-			printf("%s\n%s\n", rollNumber, temp->rollNo);
+			printf("%s\n%s\n%d\n", rollNumber, temp->rollNo,count);
 			return itr+1;
 		}
 			printf("%d\n", itr);
@@ -88,6 +88,7 @@ int deleteNode(struct student**ptr,char rollNumber[20])
 	}
 	temp -> next = (temp -> next) -> next;
 	free(temp);
+	return 1;
 }
 
 

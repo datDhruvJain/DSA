@@ -6,7 +6,7 @@
 
 cc=gcc
 
-all: Week_02 linkedlist/linkedlist.out
+all: Week_02 Week_05
 
 # Week_02
 Week_02: Week_02/Cpp-StackQa.out Week_02/C-StackQa.out
@@ -19,3 +19,9 @@ Week_02/C-StackQa.out: Week_02/StackQa.c
 
 linkedlist/linkedlist.out: linkedlist/linkedlist.c
 	cc linkedlist/linkedlist.c -o linkedlist/linkedlist.out
+
+# Week_05
+Week_05: Week_05/listWrapper.out
+
+Week_05/listWrapper.out: Week_05/listWrapper.c
+	cc Week_05/listWrapper.c -o Week_05/listWrapper.out
