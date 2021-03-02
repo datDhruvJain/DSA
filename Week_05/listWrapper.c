@@ -48,19 +48,18 @@ int insertNode(struct student**startPtr,struct student*temp)
 }
 
 //This function takes the address of the first node and a roll number as input and checks whether there is a corresponding record  in the list or not. If yes, the function returns the position of the node in the list and returns 0 otherwise.
-int searchNode(struct student**ptr,char rollNumber[20])
+int searchNode(struct student*ptr,char rollNumber[20])
 {
 	//if (count<0){return 0;}
-	int count;
-	struct student* temp = *ptr;
+	struct student* temp = ptr;
 
-	int i;
-	while((temp->next)!=NULL){
+	int count;
+	while( temp->next !=NULL){
 		temp = temp -> next;
-		i++;
+		count++;
 	}
 
-	temp = *ptr;
+	temp = ptr;
 	int itr = 0;
 
 	for(int i=0;i<count-1;i++){
@@ -77,7 +76,7 @@ int deleteNode(struct student**ptr,char rollNumber[20])
 	//if(count<0){return 0;}
 
 	struct student* temp = *ptr;
-	int index = searchNode(ptr,rollNumber);
+	int index = searchNode(*ptr,rollNumber);
 
 	for(int i =0;i<index-1;i++){
 		temp = temp -> next;
