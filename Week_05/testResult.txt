@@ -1,1 +1,17 @@
 Details for 2019A7PS0086U successfully inserted
+2019A7PS0086U present at location 1
+Details for 2019A7PS0083U successfully inserted
+2019A7PS0083U present at location 2
+Details for 2019A7PS0172U successfully inserted
+Details for 2019A7PS0087U successfully inserted
+Deletion successfull 2019A7PS0172U successfully removed
+Details for 2019A7PS0140U successfully inserted
+2019A7PS0083U present at location 2
+Details for 2019A7PS0266U successfully inserted
+Deletion successfull 2019A7PS0266U successfully removed
+Details for 2019A7PS0100U successfully inserted
+Details for 2019A7PS0184U successfully inserted
+Details for 2019A7PS0042U successfully inserted
+Deletion successfull 2019A7PS0042U successfully removed
+Details for 2019A7PS0089U successfully inserted
+Details for 2019A7PS0015U successfully inserted

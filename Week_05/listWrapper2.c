@@ -104,13 +104,13 @@ int main()
 			fscanf(fp1,"%s",buffer.lecture);
 			fscanf(fp1,"%s",buffer.tutorial);
 			fscanf(fp1,"%s",buffer.practical);
-
+/*
 			printf("%s ",buffer.rollNo);
 			printf("%s ",buffer.emailId);
 			printf("%s ",buffer.lecture);
 			printf("%s ",buffer.tutorial);
 			printf("%s\n",buffer.practical);
-
+*/
 			nodeCopy=createNode(buffer);
 			status=insertNode(&listHead,nodeCopy);
 			if(status==0)
