@@ -1,4 +1,5 @@
 #include<iostream>
+#include<cstdlib>
 
 class linkedlist{
 	typedef struct node {
@@ -10,56 +11,76 @@ class linkedlist{
 	int size = 0;
 
 	bool error_flag = 0;
+
+	Node* new_node(){
+		Node* n = (Node*) malloc(sizeof(Node));
+		return n;
+	}
 	
 	public:
-	linkedlist(){
-		Node n;
-		head = &n;
-		size++;
-	}
 
-	linkedlist(int data){
-		Node n = {data, NULL};
-		head = &n;
-		size++;
-	}
-	
-	void add(int index, int data){
+	void insert(int index, int data){
 		if (index > size){
 			std::cout << "Error, Cannot insert at index, list too small" << std::endl;
 			error_flag = 1;
+			return;
+		}
+
+		if (index == 0){
+			if(size == 0){
+				head = new_node();
+				head -> data = data;
+				head -> next = NULL;
+			}
+			
+			else {
+				Node* n = new_node();
+				n -> data = data;
+				n -> next = head;
+				head = n;
+			}
+
+			size++;
+			return;
 		}
 
 		Node* temp = head;
-
-		//while((temp<-next) != NULL){
-		//	temp = temp<-next;
-		//}
 		
-		for(int i=0; i<index; i++){
+		for(int i=0; i<index-1; i++){
 			temp = temp->next;
 
 		}
 
-		Node* n = (Node*) malloc(sizeof(Node));
+		Node* n = new_node();
 		n -> data = data;
 		n -> next = temp -> next;
 		temp -> next = n;
+		
+		size++;
+		return;
 
 	}
 
 	void printLinkedList(){
 		Node *temp = head;
 		if (size == 0){return;}
-		while(temp -> next != NULL){
+
+		for(int i=0;i<size;i++){
 			std::cout << temp -> data << std::endl;
+			temp = temp -> next;
 		}
 	}
 
 };
 
 int main(){
-	linkedlist ll = linkedlist();
-	ll.add(0,5);
+	linkedlist ll;
+	ll.insert(0,1);
+	ll.insert(1,2);
+	ll.insert(1,3);
+	ll.insert(2,4);
+	ll.insert(3,5);
+	ll.insert(4,6);
+
 	ll.printLinkedList();
 }
