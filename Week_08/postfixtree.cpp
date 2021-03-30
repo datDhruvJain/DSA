@@ -65,13 +65,14 @@ class ExpressionTree{
 	public:
 	
 	Stack s;
-	Node* constructExpressionTree(Stack s){
-		if (s.isEmpty()){
+	Node* constructExpressionTree(Stack* s){
+		if (s->isEmpty()){
 			return NULL;
 		}
 
-		char x = s.pop();
+		char x = s->pop();
 		Node* t = new Node;
+		t -> data = x;
 
 		if (x == '+' || x == '-' || x == '/' || x == '*' || x == '^'){
 			t -> right = constructExpressionTree(s);
@@ -108,8 +109,14 @@ int main(){
 	a.s.push('c');
 	a.s.push('*');
 	a.s.push('+');
-	Node* lol = a.constructExpressionTree(a.s);
+	Node* lol = a.constructExpressionTree(&a.s);
 
 	a.walk(lol);
-	std::cout << a.s.pop();
+	std::cout << (lol-> left) -> data;
+	std::cout << lol -> data;
+	std::cout << ((lol-> right) -> left) -> data;
+	std::cout << (lol -> right) -> data;
+	std::cout << ((lol-> right) -> right) -> data;
+	
+
 }
