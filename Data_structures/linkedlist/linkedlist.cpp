@@ -13,7 +13,7 @@ class linkedlist{
     int count = 0;
 
     // Insert an element at given index
-    void insert(int index, int data){
+    void insertNode(int index, int data){
         if (index>count){
             std::cout << "Error, cannot insert at index. Index out of bounds" << std::endl;
             err_flag = 1;
@@ -51,6 +51,24 @@ class linkedlist{
         count++;
     }
     
+    void deleteNode(int index){
+        Node* temp = head;
+        if (index == count -1){
+            for(int i=0;i<count-2;i++){
+                temp = temp -> next;
+            }
+            free(temp->next);
+            temp -> next = NULL;
+            return;
+        }
+
+        for(int i=0; i<index-1; i++){
+            temp = temp -> next;
+        }
+
+        temp -> next = (temp -> next) -> next;
+    }
+
     void display(){
         if (count == 0){
             std::cout << "Linked list empty" << std::endl;
@@ -64,18 +82,28 @@ class linkedlist{
         }
         std::cout << temp->data << std::endl;
     } 
+
+    bool isEmpty(){
+        if(count==0){
+            return true;
+        }
+        return false;
+    }
 };
 
-void test(){
+// --- main function to test ---
+
+int main(){
     linkedlist ll;
     
-    ll.insert(0,1);
-    ll.insert(1,2);
-    ll.insert(2,3);
-    ll.insert(3,4);
-    ll.insert(4,5);
-    ll.insert(5,6);
-    ll.insert(6,7);
+    ll.insertNode(0,1);
+    ll.insertNode(1,2);
+    ll.insertNode(2,3);
+    ll.insertNode(3,4);
+    ll.insertNode(4,5);
+    ll.insertNode(5,6);
+    ll.insertNode(6,7);
+    ll.deleteNode(6);
     ll.display();
     
 }
