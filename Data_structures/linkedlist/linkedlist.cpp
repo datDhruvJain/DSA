@@ -51,23 +51,41 @@ class linkedlist{
         count++;
     }
     
-    void deleteNode(int index){
-        Node* temp = head;
-        if (index == count -1){
-            for(int i=0;i<count-2;i++){
-                temp = temp -> next;
-            }
-            free(temp->next);
-            temp -> next = NULL;
-            return;
-        }
+	int deleteNode(int index){
+		Node* temp = head;
+		
+		// case that last element is deleted
+		if (index == count -1){
+			for(int i=0;i<count-2;i++){
+				temp = temp -> next;
+			}
+			int data = (temp->next) -> data;
+			free(temp->next);
+			temp -> next = NULL;
+			return data;
 
-        for(int i=0; i<index-1; i++){
-            temp = temp -> next;
-        }
+		}
 
-        temp -> next = (temp -> next) -> next;
-    }
+		// case that first element is deleted
+		if (index == 0 && head != NULL){
+			
+			Node* temp = head;
+			head = head -> next;
+
+			int data = temp -> data;
+			free(temp);
+			return data;
+		}
+
+		// case that any random middle eleemnt in deleted
+		for(int i=0; i<index-1; i++){
+			temp = temp -> next;
+		}
+
+		int data = (temp->next) -> data;
+		temp -> next = (temp -> next) -> next;
+		return data;
+	}
 
     void display(){
         if (count == 0){
