@@ -84,16 +84,10 @@ class ExpressionTree{
 
 	void walk(Node* n){
 		Node* temp = n;
-		if (temp -> left == NULL && temp -> right == NULL){
+		if (temp!=NULL){
+			walk(temp->left);
 			std::cout << temp -> data;
-		}
-		else if (temp -> left != NULL && temp -> right == NULL){
-			walk(n -> left);
-			std::cout << temp -> data;
-		}
-		else if (temp -> left == NULL && temp -> right != NULL){
-			walk(n -> right);
-			std::cout << temp -> data;
+			walk(temp->right);
 		}
 	}
 };
@@ -112,11 +106,12 @@ int main(){
 	Node* lol = a.constructExpressionTree(&a.s);
 
 	a.walk(lol);
-	std::cout << (lol-> left) -> data;
-	std::cout << lol -> data;
-	std::cout << ((lol-> right) -> left) -> data;
-	std::cout << (lol -> right) -> data;
-	std::cout << ((lol-> right) -> right) -> data;
+
+	//std::cout << (lol-> left) -> data;
+	//std::cout << lol -> data;
+	//std::cout << ((lol-> right) -> left) -> data;
+	//std::cout << (lol -> right) -> data;
+	//std::cout << ((lol-> right) -> right) -> data;
 	
 
 }
