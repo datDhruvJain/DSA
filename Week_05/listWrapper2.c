@@ -49,27 +49,46 @@ int insertNode(struct student**startPtr,struct student*temp)
 //This function takes the address of the first node and a roll number as input and checks whether there is a corresponding record  in the list or not. If yes, the function returns the position of the node in the list and returns 0 otherwise.
 int searchNode(struct student*ptr,char rollNumber[20])
 {
-	struct student* temp = ptr;
-	int index = 0;
-	while (temp != NULL){
-		index++;
+	struct student* temp;
+	temp = ptr;
+	int count=1;
 
-		if (strcmp(rollNumber,temp->rollNo)==0){
-			return index;
-		}
-		temp = temp->next;
+	while(temp -> rollNo != rollNumber || temp!=NULL){
+		temp = temp -> next;
+		count++;
 	}
-	
-	return 0;
+
+	if (temp == NULL){
+		return 0;
+	}
+	return count;
+
+
 }
+
 //This function looks for a node with a specific roll number in the list and deletes it if its present and returns 1 on successful deletion and 0 otherwise. Note that if in case the node that you are deleting is the first, then you have to update the listHead variable (a local variable in main) and that justifies the function being invoked with a reference to it (&listHead)  
 int deleteNode(struct student**ptr,char rollNumber[20])
 {
-	int index = searchNode(*ptr, rollNumber);
-	printf("%d", index);
+	struct student* temp = *ptr;
+	struct student* temp2;
+	int index = searchNode(*ptr,rollNumber);
 
+	// Case 1, Deleting at the start of the list
+	if (index == 1){
+		*ptr = (*ptr) -> next;
+		free(temp);
+		return 1;
+	}
+
+	for(int i =1;i<index-1;i++){
+		temp = temp -> next;
+	}
+
+	temp2 = temp -> next;
+	temp -> next = (temp -> next) -> next;
+	free(temp2);
+	return 1;
 }
-
 
 //This function takes the address of the first node in the list as input and prints the roll number and email Id of each student in the list. Finally,the function returns the length of the list
 int displayList(struct student*start)
@@ -124,7 +143,7 @@ int main()
 		}
 		else
 		{	//hit=1 --> value is present in the list and 0 otherwise
-			fscanf(fp1,"%d %s",&hit,buffer.rollNo);
+			fscanf(fp1,"%d %s",&hit,buffer.rollNo);	
 			if((op==2)&&(deleteNode(&listHead,buffer.rollNo)!=hit))
 			{
 				printf("\nThere is an error in delete function\n");
@@ -141,7 +160,6 @@ int main()
 			if(op==3)//corresponds to search, comment this if block if you want to test your deletion alone
 			{
 				int index=searchNode(listHead,buffer.rollNo);
-
 				if(((hit==0) && (index!=0))||((hit!=0)&&(index==0)))
 				{	
 					printf("\nThere is an error in search function\n");

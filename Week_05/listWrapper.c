@@ -50,44 +50,42 @@ int insertNode(struct student**startPtr,struct student*temp)
 //This function takes the address of the first node and a roll number as input and checks whether there is a corresponding record  in the list or not. If yes, the function returns the position of the node in the list and returns 0 otherwise.
 int searchNode(struct student*ptr,char rollNumber[20])
 {
-	//if (count<0){return 0;}
-	struct student* temp = ptr;
+	struct student* temp;
+	temp = ptr;
+	int count=1;
 
-	int count=0;
-	while( temp !=NULL){
+	while(temp -> rollNo != rollNumber || temp!=NULL){
 		temp = temp -> next;
 		count++;
 	}
 
-	temp = ptr;
-	int itr = 0;
-	for(int i=0;i<count;i++){
-		if (strcmp(rollNumber, temp->rollNo)==0)
-		{
-			printf("%s\n%s\n%d\n", rollNumber, temp->rollNo,count);
-			return itr+1;
-		}
-			printf("%d\n", itr);
-		temp = temp -> next;
-		itr++;
+	if (temp == NULL){
+		return 0;
 	}
-	return 0;
+	return count;
 
 }
 
 //This function looks for a node with a specific roll number in the list and deletes it if its present and returns 1 on successful deletion and 0 otherwise. Note that if in case the node that you are deleting is the first, then you have to update the listHead variable (a local variable in main) and that justifies the function being invoked with a reference to it (&listHead)  
 int deleteNode(struct student**ptr,char rollNumber[20])
 {
-	//if(count<0){return 0;}
-
+	
 	struct student* temp = *ptr;
 	int index = searchNode(*ptr,rollNumber);
 
-	for(int i =0;i<index-1;i++){
+	// Case 1, Deleting at the start of the list
+	if (index == 1){
+		*ptr = (*ptr) -> next;
+		free(temp);
+		return 1;
+	}
+
+	for(int i =1;i<index-1;i++){
 		temp = temp -> next;
 	}
+
 	temp -> next = (temp -> next) -> next;
-	free(temp);
+	free(temp->next);
 	return 1;
 }
 
@@ -106,7 +104,7 @@ int displayList(struct student*start)
 		i++;
 	}
 
-	return i;
+	return 1;
 }
 
 
