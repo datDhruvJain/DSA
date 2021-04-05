@@ -46,7 +46,6 @@ int insertNode(struct student**startPtr,struct student*temp)
 	iterator->next=temp;
 	return 1;	
 }
-
 //This function takes the address of the first node and a roll number as input and checks whether there is a corresponding record  in the list or not. If yes, the function returns the position of the node in the list and returns 0 otherwise.
 int searchNode(struct student*ptr,char rollNumber[20])
 {
@@ -54,25 +53,36 @@ int searchNode(struct student*ptr,char rollNumber[20])
 	temp = ptr;
 	int count=1;
 
-	while(temp -> rollNo != rollNumber || temp!=NULL){
+	if (temp == NULL){
+		return 0;
+	}
+	
+//	if (strcmp(temp->rollNo, rollNumber)==0){
+//		return count;
+//	}
+
+	while (temp != NULL)
+	{
+		if (strcmp(temp -> rollNo, rollNumber)==0) {
+			return count;
+		}
 		temp = temp -> next;
 		count++;
 	}
 
-	if (temp == NULL){
-		return 0;
-	}
-	return count;
-
+	return 0;
 }
 
 //This function looks for a node with a specific roll number in the list and deletes it if its present and returns 1 on successful deletion and 0 otherwise. Note that if in case the node that you are deleting is the first, then you have to update the listHead variable (a local variable in main) and that justifies the function being invoked with a reference to it (&listHead)  
 int deleteNode(struct student**ptr,char rollNumber[20])
 {
-	
 	struct student* temp = *ptr;
+	struct student* temp2;
 	int index = searchNode(*ptr,rollNumber);
 
+	if (index==0){
+		return 0;
+	}
 	// Case 1, Deleting at the start of the list
 	if (index == 1){
 		*ptr = (*ptr) -> next;
@@ -84,17 +94,15 @@ int deleteNode(struct student**ptr,char rollNumber[20])
 		temp = temp -> next;
 	}
 
+	temp2 = temp -> next;
 	temp -> next = (temp -> next) -> next;
-	free(temp->next);
+	free(temp2);
 	return 1;
 }
 
-
 //This function takes the address of the first node in the list as input and prints the roll number and email Id of each student in the list. Finally,the function returns the length of the list
 int displayList(struct student*start)
-{
-	//if (count<0){return 0;}
-
+{	
 	struct student* temp = start;
 	
 	int i;
@@ -104,7 +112,7 @@ int displayList(struct student*start)
 		i++;
 	}
 
-	return 1;
+	return i;
 }
 
 
@@ -126,7 +134,7 @@ int main()
 	for(i=0;i<138;i++)
 	{
 		fscanf(fp1,"%d",&op);
-
+	
 		if(op==1)
 		{
 			fscanf(fp1,"%s",buffer.rollNo);
@@ -134,13 +142,13 @@ int main()
 			fscanf(fp1,"%s",buffer.lecture);
 			fscanf(fp1,"%s",buffer.tutorial);
 			fscanf(fp1,"%s",buffer.practical);
-			/*
-			   printf("%s ",buffer.rollNo);
-			   printf("%s ",buffer.emailId);
-			   printf("%s ",buffer.lecture);
-			   printf("%s ",buffer.tutorial);
-			   printf("%s\n",buffer.practical);
-			   */
+/*
+			printf("%s ",buffer.rollNo);
+			printf("%s ",buffer.emailId);
+			printf("%s ",buffer.lecture);
+			printf("%s ",buffer.tutorial);
+			printf("%s\n",buffer.practical);
+*/
 			nodeCopy=createNode(buffer);
 			status=insertNode(&listHead,nodeCopy);
 			if(status==0)
@@ -182,7 +190,7 @@ int main()
 					fprintf(fp2,"%s present at location %d\n",buffer.rollNo,index);
 
 			}
-
+			
 		}
 	}
 	int count=displayList(listHead);
