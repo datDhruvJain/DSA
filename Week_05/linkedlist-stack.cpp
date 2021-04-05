@@ -1,3 +1,18 @@
+// Write a C/C++/Java program to implement a stack using linear singly linked list. 
+// Your program should read input from the file testcaseForStack.txt. 
+// Each line in the file begins with either 1 or 2. 1 stands for push and 2 stands for pop. 
+// Those lines beginning with 1 further contains the details of the record you are supposed to push. 
+// The record structure remains the same as the student record in the first part. 
+// To be specific, you are supposed to implement the following functions.
+// struct node*pop(struct node**top)//removes the topmost node from the stack and
+// returns the address of the same, returns NULL if in case the stack is empty are supposed to push.
+// int isEmpty()//returns 1 if the stack is empty (top=NULL) and 0 otherwise
+// void push(struct node**top,struct node*temp)//temp is the address of the node that you
+//  Note that the stack never gets full and hence push never fails. 
+// Note that you have to create node using malloc function, fill in data that you read from the file and then invoke push. 
+// On each successful pop, print the data associated with the node that you popped from your main function and free up the corresponding node memory 
+// (print an error message if in case the stack was empty). In addition, make sure that you declare top as a local variable in your main function and pass reference to top variable (&top) both to push and pop functions so as to update the top variable from within the function if required.
+
 #include<iostream>
 class Node{
     public:
@@ -10,8 +25,8 @@ class linkedlist{
     
     bool err_flag = 0;
     public:
-    
-    // count stores the numeber of elements in the linkedlist.
+
+	// Count stores the number of elements present in the linkedlist.
     int count = 0;
 
     // Insert an element at given index
@@ -58,12 +73,13 @@ class linkedlist{
 		
 		// case that last element is deleted
 		if (index == count -1){
-			for(int i=0;i<count-2;i++){
+			for(int i=1;i<count-1;i++){
 				temp = temp -> next;
 			}
 			int data = (temp->next) -> data;
 			free(temp->next);
 			temp -> next = NULL;
+			count--;
 			return data;
 
 		}
@@ -76,6 +92,7 @@ class linkedlist{
 
 			int data = temp -> data;
 			free(temp);
+			count--;
 			return data;
 		}
 
@@ -86,6 +103,7 @@ class linkedlist{
 
 		int data = (temp->next) -> data;
 		temp -> next = (temp -> next) -> next;
+		count--;
 		return data;
 	}
 
@@ -111,19 +129,35 @@ class linkedlist{
     }
 };
 
-// --- main function to test ---
+class llstack{
+	linkedlist ll;
+	public:
+
+	int isEmpty(){
+		if (ll.count == 0){
+			return 1;
+		}
+		
+		return 0;
+	}
+
+	int pop(){
+		 int data = ll.deleteNode(ll.count-1);
+		 return data;
+	}
+
+	void push(int data){
+		ll.insertNode(ll.count, data);
+	}
+	
+};
 
 int main(){
-    linkedlist ll;
-    
-    ll.insertNode(0,1);
-    ll.insertNode(1,2);
-    ll.insertNode(2,3);
-    ll.insertNode(3,4);
-    ll.insertNode(4,5);
-    ll.insertNode(5,6);
-    ll.insertNode(6,7);
-    ll.deleteNode(6);
-    ll.display();
-    
+	llstack stk;
+	stk.push(10);
+	stk.push(20);
+	//stk.push(30);
+	//stk.push(40);
+	printf("%d",stk.pop());
+	printf("%d",stk.pop());
 }
