@@ -16,12 +16,16 @@
 #include<iostream>
 class Node{
     public:
-    int data;
+    char rollNo[20];
+	char emailId[35];
+	char lecture[3];
+	char tutorial[3];
+	char practical[3];
     Node* next = NULL;
 };
 
-class linkedlist{
-    Node* head = NULL;
+class linkedliststk{
+    //Node* head = NULL;
     
     bool err_flag = 0;
     public:
@@ -30,90 +34,35 @@ class linkedlist{
     int count = 0;
 
     // Insert an element at given index
-    void insertNode(int index, int data){
-        if (index>count){
-            std::cout << "Error, cannot insert at index. Index out of bounds" << std::endl;
-            err_flag = 1;
-            return;
-        }
-
-        // Create a new node
-        Node* n = new Node;
-        n -> data = data;
-
-        if(index == 0){            
-            if(head == NULL){
-                n -> data = data;
-                n -> next = NULL;
-                head = n;
-                count++;
-                return;
-            }
-
-            n -> next = head;
-            head = n;
+    void pushNode(Node** head, Node* node){
+        
+        // If the list doesn't exist, create the listi
+        // We use *head because we are passing a pointer to the pointer, so we first need to dereference the head pointer
+        if(*head==NULL){
+            *head = node;
             count++;
             return;
-        }
+        } 
 
-        Node* temp;
-        temp = head;
-
-        for(int i=0; i<index - 1; i++){
-            temp = temp -> next;
-        }
-
-        temp -> next = n;
-        
-        count++;
+        node -> next = *head;
+        *head = node;
     }
     
-	int deleteNode(int index){
-		Node* temp = head;
+	Node* popNode(Node** head){
 		
-		// case that last element is deleted
-		if (index == count -1){
-			for(int i=1;i<count-1;i++){
-				temp = temp -> next;
-			}
-			int data = (temp->next) -> data;
-			free(temp->next);
-			temp -> next = NULL;
-			count--;
-			return data;
-
-		}
-
-		// case that first element is deleted
-		if (index == 0 && head != NULL){
-			
-			Node* temp = head;
-			head = head -> next;
-
-			int data = temp -> data;
-			free(temp);
-			count--;
-			return data;
-		}
-
-		// case that any random middle eleemnt in deleted
-		for(int i=0; i<index-1; i++){
-			temp = temp -> next;
-		}
-
-		int data = (temp->next) -> data;
-		temp -> next = (temp -> next) -> next;
-		count--;
-		return data;
+        Node* temp = *head;
+        *head = (**head).next;
+        count--;
+        return temp;
 	}
 
-    void display(){
+    void display(Node** head){
         if (count == 0){
             std::cout << "Linked list empty" << std::endl;
             return;
         }
 
-        Node* temp = head;
+        Node* temp = *head;
         while(temp -> next != NULL){
             std::cout << temp->data << " ";
             temp = temp -> next;
@@ -129,35 +78,32 @@ class linkedlist{
     }
 };
 
-class llstack{
-	linkedlist ll;
-	public:
-
-	int isEmpty(){
-		if (ll.count == 0){
-			return 1;
-		}
-		
-		return 0;
-	}
-
-	int pop(){
-		 int data = ll.deleteNode(ll.count-1);
-		 return data;
-	}
-
-	void push(int data){
-		ll.insertNode(ll.count, data);
-	}
-	
-};
-
 int main(){
-	llstack stk;
-	stk.push(10);
-	stk.push(20);
-	//stk.push(30);
-	//stk.push(40);
-	printf("%d",stk.pop());
-	printf("%d",stk.pop());
+    linkedliststk stk;
+    Node* top = NULL;
+    Node n;
+    n.data = 12;
+
+    stk.pushNode(&top, &n);
+    stk.display(&top);
+    stk.popNode(&top);
+    stk.display(&top);
+
+	int op;
+
+   FILE*fp1; 
+   fp1=fopen("testcaseForStack.txt","r");
+
+   for (i=0;i<138;i++){
+		fscanf(fp1,"%d", &op);
+
+		if(op==1){
+
+		}
+   }
+   strcpy(ptr->rollNo, buffer.rollNo);
+   strcpy(ptr->emailId, buffer.emailId);
+   strcpy(ptr->lecture, buffer.lecture);
+   strcpy(ptr->tutorial, buffer.tutorial);
+   strcpy(ptr->practical, buffer.practical);
 }
